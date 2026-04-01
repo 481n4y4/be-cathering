@@ -5,10 +5,10 @@ const dotenv = require('dotenv');
 
 dotenv.config();
 
-const authRoutes = require('./routes/authRoutes');
-const productRoutes = require('./routes/productRoutes');
-const cartRoutes = require('./routes/cartRoutes');
-const orderRoutes = require('./routes/orderRoutes');
+const authRoutes = require('./src/routes/authRoutes');
+const productRoutes = require('./src/routes/productRoutes');
+const cartRoutes = require('./src/routes/cartRoutes');
+const orderRoutes = require('./src/routes/orderRoutes');
 
 const app = express();
 
@@ -16,10 +16,7 @@ app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-mongoose.connect(process.env.MONGODB_URI, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true
-}).then(() => {
+mongoose.connect(process.env.MONGO_URI).then(() => {
     console.log('Connected to MongoDB');
 }).catch((error) => {
     console.error('MongoDB connection error:', error);
