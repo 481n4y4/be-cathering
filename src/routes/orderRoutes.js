@@ -3,7 +3,7 @@ const { checkout, createOrder, paymentMidtrans, confirmCOD } = require('../contr
 const { protect } = require('../middleware/authMiddleware');
 const router = express.Router();
 
-router.use(protect); // All order routes require authentication
+router.use(protect);
 
 router.post('/checkout', checkout);
 router.post('/create', createOrder);
