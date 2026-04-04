@@ -283,22 +283,3 @@ Authorization: Bearer YOUR_JWT_TOKEN
 
 * Gunakan token dari hasil login
 * Pastikan format request sesuai (JSON atau form-data)
-
----
-
-## 🚀 Tips Testing
-
-* Gunakan **Postman** atau **Insomnia**
-* Upload gambar gunakan `form-data`
-* Simpan JWT di environment variable agar lebih mudah digunakan
-
----
-
-🔥 Done! README ini sudah siap langsung kamu commit ke GitHub.
-Kalau mau, aku juga bisa tambahin:
-
-* ERD
-* Flow diagram
-* Struktur folder backend kamu
-
-Mau lanjut ke situ?

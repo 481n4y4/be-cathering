@@ -31,8 +31,13 @@ const orderSchema = new mongoose.Schema({
     enum: ['Pending', 'Diproses', 'Dikirim', 'Selesai'],
     default: "Pending",
   },
+  payment_status: {  // Tambahkan field terpisah untuk status pembayaran
+    type: String,
+    enum: ['Unpaid', 'Paid', 'Refunded'],
+    default: 'Unpaid'
+  }
 }, {
   timestamps: true
 });
 
-module.exports = mongoose.model('Order', orderSchema)
+module.exports = mongoose.model('Order', orderSchema);
