@@ -15,6 +15,10 @@ Berikut library yang digunakan:
 - **jsonwebtoken** → Authentication (JWT)
 - **bcryptjs** → Hashing password
 - **multer** → Upload file (image)
+- **cloudinary** → Penyimpanan dan manajemen file gambar di cloud
+- **midtrans-client** → Payment gateway integration (Midtrans)
+- **body-parser** → Middleware parsing request body
+- **nodemon** → Auto-reload saat development (devDependencies)
 
 ---
 
