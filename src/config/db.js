@@ -1,15 +1,38 @@
-import mongoose from "mongoose";
+const mongoose = require("mongoose");
 
-const connectDB = async () => {
-    if (mongoose.connection.readyState >= 1) return
+let cached = global.mongoose;
 
-    try{
-        await mongoose.connect(process.env.MONGO_URI)
-        console.log('MongoDB is connected')
-    } catch (err) {
-        console.error("MongoDB connection error:", err)
-        throw
-    }
+if (!cached) {
+  cached = global.mongoose = { conn: null, promise: null };
 }
 
-export default connectDB;
+const connectDB = async () => {
+  if (cached.conn) {
+    console.log("✅ Using cached MongoDB connection");
+    return cached.conn;
+  }
+
+  if (!cached.promise) {
+    if (!process.env.MONGO_URI) {
+      throw new Error("❌ MONGO_URI tidak ditemukan di environment variables");
+    }
+
+    cached.promise = mongoose.connect(process.env.MONGO_URI, {
+      bufferCommands: false, 
+      serverSelectionTimeoutMS: 5000, 
+    })
+    .then((mongooseInstance) => {
+      console.log("🔥 MongoDB Connected:", mongooseInstance.connection.host);
+      return mongooseInstance;
+    })
+    .catch((err) => {
+      console.error("❌ MongoDB connection failed:", err.message);
+      throw err;
+    });
+  }
+
+  cached.conn = await cached.promise;
+  return cached.conn;
+};
+
+module.exports = connectDB;
